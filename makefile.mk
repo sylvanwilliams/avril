@@ -13,7 +13,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-AVRLIB_TOOLS_PATH ?= /usr/local/CrossPack-AVR/bin/
+# AVRLIB_TOOLS_PATH ?= /usr/local/CrossPack-AVR/bin/
+AVRLIB_TOOLS_PATH ?= /Applications/Arduino.app/Contents/Resources/Java/hardware/tools/avr/bin/
 BUILD_ROOT     = build/
 BUILD_DIR      = $(BUILD_ROOT)$(TARGET)/
 PROGRAMMER     ?= avrispmkII
@@ -144,7 +145,7 @@ AVRDUDE_LOCK_OPTS ?= -U lock:w:0x$(LOCK):m
 endif
 
 ifeq ($(AVRDUDE_ERASE),no)
-AVRDUDE_ERASE_OPTS = 
+AVRDUDE_ERASE_OPTS =
 else
 AVRDUDE_ERASE_OPTS ?= -D
 endif
@@ -168,7 +169,7 @@ bin:	$(TARGET_BIN)
 
 upload:    $(TARGET_HEX)
 		$(AVRDUDE) $(AVRDUDE_ERASE_OPTS) $(AVRDUDE_COM_OPTS) $(AVRDUDE_ISP_OPTS) \
-			-B 1 -U flash:w:$(TARGET_HEX):i $(AVRDUDE_LOCK_OPTS) 
+			-B 1 -U flash:w:$(TARGET_HEX):i $(AVRDUDE_LOCK_OPTS)
 
 slow_upload:    $(TARGET_HEX)
 		$(AVRDUDE) $(AVRDUDE_ERASE_OPTS) $(AVRDUDE_COM_OPTS) $(AVRDUDE_ISP_OPTS) \
@@ -255,7 +256,7 @@ flash_restore:
 
 RESOURCE_COMPILER = avrlib/tools/resources_compiler.py
 
-resources:	$(wildcard $(RESOURCES)/*.py) 
+resources:	$(wildcard $(RESOURCES)/*.py)
 		python $(RESOURCE_COMPILER) $(RESOURCES)/resources.py
 
 # ------------------------------------------------------------------------------
